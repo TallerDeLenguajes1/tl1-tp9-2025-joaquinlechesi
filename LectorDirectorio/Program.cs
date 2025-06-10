@@ -2,22 +2,24 @@
 // Console.WriteLine("Hello, World!");
 
 string path;
-Console.WriteLine("Ingrese la direccion/path que desee manipular:");
-path = Console.ReadLine();
 do
 {
-    if (!File.Exists(path))
-    {
-        Console.WriteLine("El directorio no existe.");
-    }
-    else
+    Console.WriteLine("Ingrese la direccion/path que desee manipular o '0' para finalizar:");
+    path = Console.ReadLine();
+    Console.WriteLine("Directorio ingresado:\n" + path);
+    if (Directory.Exists(path))
     {
         // Directory.GetDirectories(path);
         string[] directorios = Directory.GetDirectories(path);
+        // string[] archivos = 
         Console.WriteLine("Subdirectorios:");
         for (int i = 0; i < directorios.Length; i++)
         {
             Console.WriteLine(directorios[i]);
         }
     }
-} while (!File.Exists(path));
+    else
+    {
+        Console.WriteLine("El directorio no existe.");
+    }
+} while (!Directory.Exists(path) && path != "0");
