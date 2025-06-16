@@ -9,7 +9,10 @@ do
 {
     Console.WriteLine("Ingrese la direccion/path que desee manipular o '0' para finalizar:\nEjemplor de un path:\nC:\\Users\\joaqu\\Facultad\\2025");
     path = Console.ReadLine();
-    Console.WriteLine("Directorio ingresado:\n" + path + "\n");
+    if (path != "0")
+    {
+        Console.WriteLine("Directorio ingresado:\n" + path + "\n");
+    }
     if (Directory.Exists(path)) // Directory porporciona metodos estadicos
     {
         // Directory.GetDirectories(path);
@@ -29,12 +32,13 @@ do
         }
         string archivoCrear = path + "\\reporte_archivos.csv";
         FileStream archivo = File.Create(archivoCrear);
+        FileInfo informacionArchivo = new FileInfo(archivoCrear);
+        string nombreArchivo = informacionArchivo.Name;
+        long tamanioArchivoKB = informacionArchivo.Length / 1024;
+        DateTime ultimaModificacion = informacionArchivo.LastWriteTime;
         archivo.Close();
         StreamWriter archivoEscribir = new StreamWriter(archivoCrear);
-        for (int i = 0; i < archivos.Length; i++)
-        {
-            archivoEscribir.WriteLine(archivos[i]);
-        }
+        archivoEscribir.WriteLine($"{nombreArchivo},{Decimal.Round(tamanioArchivoKB, 2)}KB,{ultimaModificacion.ToString()}"); // escribre en el acchivo
         archivoEscribir.Close();
     }
     else
