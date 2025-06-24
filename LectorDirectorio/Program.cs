@@ -1,6 +1,7 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using System.Collections.Specialized;
 using System.ComponentModel;
+using LectorDirectorio;
 
 Console.WriteLine("Ejercicio 1");
 
@@ -30,16 +31,19 @@ do
             long tamanioKB = info.Length;
             Console.WriteLine("Nombre del archivo:\n" + archivos[i] + " , tamaño: " + (tamanioKB / 1024) + "KB"); // Escribo por consola todos los archivos dentro del path
         }
-        string archivoCrear = path + "\\reporte_archivos.csv";
-        FileStream archivo = File.Create(archivoCrear);
-        FileInfo informacionArchivo = new FileInfo(archivoCrear);
-        string nombreArchivo = informacionArchivo.Name;
-        long tamanioArchivoKB = informacionArchivo.Length / 1024;
-        DateTime ultimaModificacion = informacionArchivo.LastWriteTime;
-        archivo.Close();
-        StreamWriter archivoEscribir = new StreamWriter(archivoCrear);
-        archivoEscribir.WriteLine($"{nombreArchivo},{Decimal.Round(tamanioArchivoKB, 2)}KB,{ultimaModificacion.ToString()}"); // escribre en el acchivo
-        archivoEscribir.Close();
+        string ruta = "Archivos\\reporte_archivos.csv";
+        Archivo.guardarArchivo(ruta, archivos); // clase estatica
+        //var nuevoArchivo = new Archivo();
+        //nuevoArchivo.guardarArchivo(ruta, archivos);
+        // FileStream archivo = File.Create(archivoCrear); // se puede emplear la using
+        // FileInfo informacionArchivo = new FileInfo(archivoCrear);
+        // string nombreArchivo = informacionArchivo.Name;
+        // long tamanioArchivoKB = informacionArchivo.Length / 1024;
+        // DateTime ultimaModificacion = informacionArchivo.LastWriteTime;
+        // archivo.Close();
+        // StreamWriter archivoEscribir = new StreamWriter(archivoCrear);
+        // archivoEscribir.WriteLine($"{nombreArchivo},{Decimal.Round(tamanioArchivoKB, 2)}KB,{ultimaModificacion.ToString()}"); // escribre en el acchivo
+        // archivoEscribir.Close();
     }
     else
     {
